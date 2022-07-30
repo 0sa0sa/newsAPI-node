@@ -1,5 +1,6 @@
 const express = require("express");
 const cors = require("cors");
+const { request } = require("express");
 const app = express();
 const port = 8080;
 
@@ -20,8 +21,17 @@ app.use(cors());
 //   }
 // };
 // app.use(allowCrossDomain);
+const url =
+  "https://newsapi.org/v2/top-headlines?" +
+  "country=us&" +
+  `apiKey=${process.env.APIKEY}`;
 
-app.get("/", (req, res) => res.send("Hello World!"));
+app.get("/", (req, res) => {
+  request(url, (err, res, body) => {
+    console.log(body);
+    res.send(body);
+  });
+});
 
 // app.use(cors({ origin: "http://127.0.0.1:5173/" }));
 app.listen(process.env.PORT || port, () =>
