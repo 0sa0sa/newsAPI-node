@@ -35,7 +35,7 @@ app.use(cors());
 
 app.get("/", async (req, res) => {
   const response = await newsapi.v2.topHeadlines({
-    country: "us",
+    country: "jp",
   });
   console.log("res ", response);
   res.send(response);
